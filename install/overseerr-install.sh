@@ -40,6 +40,7 @@ msg_ok "Installed Yarn"
 msg_info "Installing Overseerr (Patience)"
 git clone -q https://github.com/sct/overseerr.git /opt/overseerr
 cd /opt/overseerr
+$STD git checkout master
 $STD yarn install
 $STD yarn build
 msg_ok "Installed Overseerr"
