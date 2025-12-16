@@ -21,6 +21,18 @@ setup_go
 fetch_and_deploy_gh_release "discopanel" "nickheyer/discopanel" "tarball" "latest" "/opt/discopanel"
 setup_docker
 
+msg_info "Customizing Docker"
+mkdir -p /etc/docker
+cat <<EOF > /etc/docker/daemon.json
+{
+  "default-sysctls": {
+    "net.ipv4.ip_unprivileged_port_start": "0"
+  }
+}
+EOF
+systemctl restart docker
+msg_ok "Customized Docker
+
 msg_info "Setting up DiscoPanel"
 cd /opt/discopanel
 $STD make gen
